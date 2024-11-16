@@ -1,2 +1,2 @@
-# Luna
+# Epsilon
 AI powered voice assistant.

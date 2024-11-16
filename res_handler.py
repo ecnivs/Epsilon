@@ -7,9 +7,8 @@ import os
 import random
 
 class ResponseHandler:
-    def __init__(self, core):
+    def __init__(self):
         self.agent = Agent()
-        self.core = core
         self.nlp = spacy.load("en_core_web_sm")
         self.cache_file = "cache.json"
         self.cache = self.load_cache()
@@ -39,8 +38,7 @@ class ResponseHandler:
         query_hash = self.hash_query(query)
         agent_response = self.agent.get_response(query)
         response = None
-        
-        # check for timeout
+
         if agent_response is not None:
             if query_hash in self.cache:
                 detected_intent = self.cache[query_hash]['intent']
@@ -52,7 +50,6 @@ class ResponseHandler:
         if not response:
             response = self.agent.fulfillment_text
 
-        # cache responses
         detected_intent = self.agent.detected_intent
         if detected_intent not in self.cache:
             self.cache[detected_intent] = []
