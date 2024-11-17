@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shield Your Website - DDoS Protection</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #050505;
+            color: #ffffff;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .title {
+            font-size: 50px;
+            font-weight: 500;
+            letter-spacing: 11px;
+            margin-bottom: 20px;
+        }
+
+        .title span.protect {
+            color: #0586ff;
+        }
+
+        .subtitle {
+            color: rgba(255, 255, 255, 0.75);
+            font-size: 18px;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            max-width: 1000px;
+            margin: 40px auto;
+            gap: 20px;
+        }
+
+        .nav-button {
+            flex: 1;
+            padding: 15px 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            background: transparent;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-button:hover {
+            border-color: #0586ff;
+            background: rgba(5, 134, 255, 0.1);
+        }
+
+        .nav-button.active {
+            border-color: #0586ff;
+            background: rgba(5, 134, 255, 0.2);
+        }
+
+        .protection-panel {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 40px;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .panel-title {
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+
+        .panel-subtitle {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 30px;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 10px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .url-input {
+            flex: 1;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            font-size: 16px;
+        }
+
+        .scan-button {
+            padding: 15px 40px;
+            border: none;
+            border-radius: 8px;
+            background: #0586ff;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .scan-button:hover {
+            background: #0478e5;
+        }
+
+        .auto-fill {
+            margin-top: 10px;
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: underline;
+        }
+
+        .auto-fill:hover {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        #protection-metrics {
+            display: none;
+            margin-top: 30px;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .metric-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 24px;
+            color: #0586ff;
+            margin-bottom: 10px;
+        }
+
+        .metric-label {
+            color: rgba(255, 255, 255, 0.7);
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="title">
+                DETECT.<span class="protect">PROTECT</span>.PREVENT
+            </h1>
+            <p class="subtitle">
+                Empowering Your Digital Safety with Smart, AI-Driven Cybersecurity Solutions
+                Tailored for the Modern Threat Landscape
+            </p>
+        </header>
+
+        <nav class="nav-buttons">
+            <button class="nav-button">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3z"/>
+                </svg>
+                Identify Threats Instantly
+            </button>
+            <button class="nav-button active">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                </svg>
+                Shield Your Website
+            </button>
+            <button class="nav-button">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                    <path d="M7 11V7a5 5 0 0110 0v4"/>
+                </svg>
+                Secure Your Code
+            </button>
+        </nav>
+
+        <div class="protection-panel">
+            <h2 class="panel-title">Protect Your Website from Attacks</h2>
+            <p class="panel-subtitle">Safeguard your site against DDoS threats and ensure uninterrupted operations</p>
+            
+            <div class="input-group">
+                <input type="text" class="url-input" placeholder="Paste your website URL or IP Address here" id="target-url">
+                <button class="scan-button" onclick="startProtection()">Scan</button>
+            </div>
+            <button class="auto-fill" onclick="autoFillCurrentURL()">Auto Fill</button>
+
+            <div id="protection-metrics">
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-value" id="total-connections">0</div>
+                        <div class="metric-label">Active Connections</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value" id="blocked-ips">0</div>
+                        <div class="metric-label">Blocked IPs</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value" id="suspicious-ips">0</div>
+                        <div class="metric-label">Suspicious IPs</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value" id="blocked-attacks">0</div>
+                        <div class="metric-label">Attacks Prevented</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function startProtection() {
+            const targetUrl = document.getElementById('target-url').value;
+            if (!targetUrl) {
+                alert('Please enter a valid URL or IP address');
+                return;
+            }
+
+            // Show metrics section
+            document.getElementById('protection-metrics').style.display = 'block';
+            
+            // Start updating metrics
+            updateMetrics();
+            setInterval(updateMetrics, 1000);
+        }
+
+        function autoFillCurrentURL() {
+            document.getElementById('target-url').value = window.location.host;
+        }
+
+        function updateMetrics() {
+            fetch('/api/metrics')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('total-connections').textContent = data.total_connections;
+                    document.getElementById('blocked-ips').textContent = data.blocked_ips;
+                    document.getElementById('suspicious-ips').textContent = data.suspicious_ips;
+                    document.getElementById('blocked-attacks').textContent = data.blocked_attacks;
+                })
+                .catch(error => console.error('Error updating metrics:', error));
+        }
+    </script>
+</body>
+</html>

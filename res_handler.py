@@ -1,4 +1,5 @@
 # response handler
+from web_handler import WebHandler
 from dflow_handler import Agent
 import spacy
 import hashlib
@@ -7,8 +8,10 @@ import os
 import random
 
 class ResponseHandler:
-    def __init__(self):
+    def __init__(self, core):
+        self.web = WebHandler()
         self.agent = Agent()
+        self.core = core
         self.nlp = spacy.load("en_core_web_sm")
         self.cache_file = "cache.json"
         self.cache = self.load_cache()
@@ -38,7 +41,8 @@ class ResponseHandler:
         query_hash = self.hash_query(query)
         agent_response = self.agent.get_response(query)
         response = None
-
+        
+        # check for timeout
         if agent_response is not None:
             if query_hash in self.cache:
                 detected_intent = self.cache[query_hash]['intent']
@@ -47,9 +51,17 @@ class ResponseHandler:
                     return f'{random.choice(cached_responses)}'
             return "Request timed out. Please check your internet connection."
 
+        if 'web.search' in self.agent.detected_intent:
+            key_phrases = str(self.extract_key_phrases(query))
+            if not key_phrases.strip() == "":
+                response = self.web.search(key_phrases)
+            else:
+                response =  self.web.search(query)
+
         if not response:
             response = self.agent.fulfillment_text
 
+        # cache responses
         detected_intent = self.agent.detected_intent
         if detected_intent not in self.cache:
             self.cache[detected_intent] = []
