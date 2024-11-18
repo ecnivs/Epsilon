@@ -1,5 +1,10 @@
-# Luna
-AI powered voice assistant.
+# Luna AI
+## Overview
+An AI based Voice CyberSecurity Assistant
 
-## Smash Hack 2024 - PES University
-### Team Epsilon (Top 10)
+![image](https://github.com/user-attachments/assets/94d631d6-99a5-4d01-879d-cacb67e13c8f)
+
+
+## Team Epsilon (Top 10)
+
+### I'd appreciate any feedback or code reviews you might have!
