@@ -7,4 +7,4 @@ An AI based Voice CyberSecurity Assistant
 
 ## Team Epsilon (Top 10)
 
-### I'd appreciate any feedback or code reviews you might have!
+### We'd appreciate any feedback or code reviews you might have!
