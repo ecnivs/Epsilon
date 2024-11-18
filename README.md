@@ -5,7 +5,7 @@
 
 
 ## 🏆 Recognition
-* **Top 10 Finalist** in SmashHack 2024 - A testament to our innovative approach to cybersecurity and AI integration
+* **Secured 4th Place** in SmashHack 2024 - A testament to our innovative approach to cybersecurity and AI integration
 
 ## 🌟 Overview
 Luna AI is a comprehensive cybersecurity solution that empowers organizations with advanced tools to combat cyber threats. Our AI-driven approach combines smart detection, robust protection, and proactive prevention, all tailored for the modern threat landscape.
