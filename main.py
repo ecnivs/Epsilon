@@ -9,7 +9,7 @@ import time
 from TTS.api import TTS
 import logging
 import torch
-import simpleaudio as sa
+import wave
 
 logging.basicConfig(level=logging.DEBUG, 
                     format='%(levelname)s - %(message)s',
@@ -57,12 +57,36 @@ class Core:
             logging.error(f'Error in TTS: {e}')
 
     def play_audio(self, filename):
-        try:
-            wave_obj = sa.WaveObject.from_wave_file(f'audio/{filename}', 'rb')
-            play_obj = wave_obj.play()
-            play_obj.wait_done()
-        except Exception as e:
-            logging.error(f'Unexpected error while playing audio file {filename}: {e}')
+        def audio_thread():
+            stream = None
+            try:
+                with wave.open(f'audio/{filename}', 'rb') as wf:
+                    chunk_size = 1024
+                    stream = self.audio.open(
+                        format=self.audio.get_format_from_width(wf.getsampwidth()),
+                        channels=wf.getnchannels(),
+                        rate=wf.getframerate(),
+                        output=True,
+                        frames_per_buffer=chunk_size)
+
+                    data = wf.readframes(chunk_size)
+                    while data:
+                        while stream.get_write_available() < len(data):
+                            time.sleep(0.001)
+                        stream.write(data)
+                        data = wf.readframes(chunk_size)
+
+                    stream.stop_stream()
+
+            except Exception as e:
+                logging.error(f'Error playing audio file {filename}: {e}')
+            finally:
+                if stream is not None:
+                    if stream.is_active():
+                        stream.stop_stream()
+                    stream.close()
+
+        threading.Thread(target=audio_thread, daemon=True).start()
 
     def recognize_speech(self):
         stream = self.audio.open(format=pyaudio.paInt16,
